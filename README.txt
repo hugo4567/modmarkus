@@ -1,4 +1,19 @@
 -------------------------------------------
+
+
+
+
+MODMARKUS
+Un petit mod sympa, qui rajoute un telephone avec la commande /msg2 qui permet denvoyer des messages, eajoute un monstre qui te suit selonndes musiques et une malediction.
+
+
+
+
+
+
+
+
+-------------------------------------------
 Source installation information for modders
 -------------------------------------------
 This code follows the Minecraft Forge installation methodology. It will apply
