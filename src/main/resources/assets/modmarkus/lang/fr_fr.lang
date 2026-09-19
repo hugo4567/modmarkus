@@ -1,0 +1,8 @@
+item.telephone.name=Téléphone
+gui.modmarkus.incoming_call=Appel entrant
+gui.modmarkus.accept=Décrocher
+gui.modmarkus.decline=Raccrocher
+chat.modmarkus.lost_something=vous avez perdu qqch
+chat.modmarkus.no_missed_calls=pas de message manqués
+chat.modmarkus.slipped=vous avez glissé
+chat.modmarkus.forgot_phone=Je crois que jai oublié mon phone

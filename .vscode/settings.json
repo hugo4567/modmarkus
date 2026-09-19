@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "gradle clean": true,
+        "&": true,
+        "call": true
+    },
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

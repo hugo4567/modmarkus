@@ -1,0 +1,104 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Setup Workspace (ModMarkus)",
+            "type": "shell",
+            "command": "c:\\gradle\\gradle-4.10.3\\bin\\gradle.bat",
+            "args": [
+                "setupDecompWorkspace"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "🎮 Launch Client Debug (ModMarkus)",
+            "type": "shell",
+            "command": "c:\\gradle\\gradle-4.10.3\\bin\\gradle.bat",
+            "args": [
+                "runClient",
+                "--debug-jvm"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^.*$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Listening for transport dt_socket",
+                    "endsPattern": "Process.*finished"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "debug"
+            }
+        },
+        {
+            "label": "🖥️ Launch Server Debug (ModMarkus)",
+            "type": "shell",
+            "command": "c:\\gradle\\gradle-4.10.3\\bin\\gradle.bat",
+            "args": [
+                "runServer",
+                "--debug-jvm"
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^.*$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Listening for transport dt_socket",
+                    "endsPattern": "Process.*finished"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "debug"
+            }
+        },
+        {
+            "label": "Build JAR (ModMarkus)",
+            "type": "shell",
+            "command": "c:\\gradle\\gradle-4.10.3\\bin\\gradle.bat",
+            "args": [
+                "build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Clean Build (ModMarkus)",
+            "type": "shell",
+            "command": "c:\\gradle\\gradle-4.10.3\\bin\\gradle.bat",
+            "args": [
+                "clean",
+                "build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }
+    ]
+}

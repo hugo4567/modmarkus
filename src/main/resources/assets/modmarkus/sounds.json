@@ -1,0 +1,32 @@
+{
+  "redsun": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "modmarkus:music/redsun",
+        "stream": true
+      }
+    ],
+    "subtitle": "Healing Theme"
+  },
+  "banjo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "modmarkus:music/banjo",
+        "stream": true
+      }
+    ],
+    "subtitle": "Fire Theme"
+  },
+  "slip": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "modmarkus:music/slip",
+        "stream": false
+      }
+    ],
+    "subtitle": "Glissade"
+  }
+}

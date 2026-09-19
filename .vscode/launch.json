@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🎮 Debug Client (ModMarkus)",
+            "type": "java",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005,
+            "preLaunchTask": "🎮 Launch Client Debug (ModMarkus)",
+            "presentation": {
+                "hidden": false,
+                "group": "0_init",
+                "order": 0
+            },
+            "showLog": true
+        },
+        {
+            "name": "🖥️ Debug Server (ModMarkus)",
+            "type": "java",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005,
+            "preLaunchTask": "🖥️ Launch Server Debug (ModMarkus)",
+            "presentation": {
+                "hidden": false,
+                "group": "0_init",
+                "order": 1
+            },
+            "showLog": true
+        }
+    ]
+}
+

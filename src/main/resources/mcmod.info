@@ -1,0 +1,16 @@
+[
+{
+  "modid": "modmarkus",
+  "name": "The MOD THE WORLD",
+  "description": "Ce mod ajoute un telephone au jeu.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "hugo.com",
+  "updateUrl": "",
+  "authorList": ["hugo4"],
+  "credits": "hugoland",
+  "logoFile": "textures/image.png",
+  "screenshots": ["textures/telephone.png"],
+  "dependencies": []
+}
+]
