@@ -5,6 +5,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -34,7 +35,10 @@ public class MessageMissedCall implements IMessage {
                     if (!stack.isEmpty() && stack.getItem() == ModItems.TELEPHONE) {
                         System.out.println("[ModMarkus] Téléphone trouvé dans le slot " + i + ". Drop en cours...");
                         // Créer l'entité item pour le drop
-                        EntityItem entityItem = new EntityItem(player.world, player.posX, player.posY + 0.5, player.posZ, stack.copy());
+                        ItemStack droppedStack = stack.copy();
+                        NBTTagCompound tag = droppedStack.getOrCreateSubCompound("TelephoneData");
+                        tag.setString("Owner", player.getUniqueID().toString());
+                        EntityItem entityItem = new EntityItem(player.world, player.posX, player.posY + 0.5, player.posZ, droppedStack);
                         entityItem.setNoPickupDelay();
                         entityItem.motionY = 0.2;
                         player.world.spawnEntity(entityItem);

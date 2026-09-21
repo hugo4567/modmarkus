@@ -18,6 +18,7 @@ public class GuiIncomingCall extends GuiScreen {
 
     private ISound ringtone;
     private int ticksOpen = 0;
+    private boolean callHandled = false;
     private static final int TIMEOUT_TICKS = 10 * 20; // 10 secondes
 
     @Override
@@ -27,6 +28,7 @@ public class GuiIncomingCall extends GuiScreen {
         
         if (ticksOpen >= TIMEOUT_TICKS) {
             // Temps écoulé sans réponse
+            callHandled = true;
             com.example.modmarkus.network.NetworkHandler.INSTANCE.sendToServer(new com.example.modmarkus.network.MessageMissedCall());
             stopRingtone();
             this.mc.displayGuiScreen(null);
@@ -70,11 +72,13 @@ public class GuiIncomingCall extends GuiScreen {
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button.id == 0) {
             // Décrocher
+            callHandled = true;
             stopRingtone();
             this.mc.displayGuiScreen(null);
             // On pourrait ajouter d'autres actions ici plus tard
         } else if (button.id == 1) {
             // Raccrocher
+            callHandled = true;
             com.example.modmarkus.network.NetworkHandler.INSTANCE.sendToServer(new com.example.modmarkus.network.MessageHangUp());
             stopRingtone();
             this.mc.displayGuiScreen(null);
@@ -83,6 +87,10 @@ public class GuiIncomingCall extends GuiScreen {
 
     @Override
     public void onGuiClosed() {
+        if (!callHandled) {
+            callHandled = true;
+            com.example.modmarkus.network.NetworkHandler.INSTANCE.sendToServer(new com.example.modmarkus.network.MessageMissedCall());
+        }
         stopRingtone();
     }
 

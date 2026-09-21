@@ -1,8 +1,10 @@
 package com.example.modmarkus.handler;
 
 import com.example.modmarkus.item.ModItems;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -31,7 +33,7 @@ public class PlayerSpawnHandler {
 
             if (!hasTelephone) {
                 // addItemStackToInventory renvoie false si l'inventaire est plein
-                boolean added = player.inventory.addItemStackToInventory(new ItemStack(ModItems.TELEPHONE));
+                boolean added = player.inventory.addItemStackToInventory(createTelephone(player));
                 if (!added) {
                     // Si l'inventaire est plein, on le drop au sol à la place de ne rien faire ? 
                     // L'utilisateur dit "ne remplace aucun item", ce qui est le cas par défaut de addItemStackToInventory.
@@ -39,6 +41,21 @@ public class PlayerSpawnHandler {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        EntityPlayer player = event.player;
+        if (player.world.isRemote || hasTelephone(player)) {
+            return;
+        }
+
+        removeDroppedTelephone(player);
+        ItemStack replacement = createTelephone(player);
+        if (!player.inventory.addItemStackToInventory(replacement)) {
+            player.entityDropItem(replacement, 0.0F);
+        }
+        player.inventory.markDirty();
     }
 
     @SubscribeEvent
@@ -60,6 +77,9 @@ public class PlayerSpawnHandler {
                     player.addPotionEffect(new net.minecraft.potion.PotionEffect(net.minecraft.init.MobEffects.BLINDNESS, 40, 0));
                     // Poison pendant 2s (40 ticks)
                     player.addPotionEffect(new net.minecraft.potion.PotionEffect(net.minecraft.init.MobEffects.POISON, 40, 0));
+                    // Nausée pendant 2s (40 ticks)
+                    player.addPotionEffect(new net.minecraft.potion.PotionEffect(net.minecraft.init.MobEffects.NAUSEA, 40, 0));
+                    player.sendMessage(new net.minecraft.util.text.TextComponentString("Je dois le retrouver"));
                 }
             }
         }
@@ -73,5 +93,27 @@ public class PlayerSpawnHandler {
             }
         }
         return false;
+    }
+
+    private static ItemStack createTelephone(EntityPlayer player) {
+        ItemStack telephone = new ItemStack(ModItems.TELEPHONE);
+        NBTTagCompound tag = telephone.getOrCreateSubCompound("TelephoneData");
+        tag.setString("Owner", player.getUniqueID().toString());
+        return telephone;
+    }
+
+    private static void removeDroppedTelephone(EntityPlayer player) {
+        String owner = player.getUniqueID().toString();
+        for (net.minecraft.entity.Entity entity : player.world.loadedEntityList) {
+            if (entity instanceof EntityItem) {
+                EntityItem entityItem = (EntityItem) entity;
+                ItemStack stack = entityItem.getItem();
+                NBTTagCompound tag = stack.getSubCompound("TelephoneData");
+                if (!stack.isEmpty() && stack.getItem() == ModItems.TELEPHONE
+                        && tag != null && owner.equals(tag.getString("Owner"))) {
+                    entityItem.setDead();
+                }
+            }
+        }
     }
 }
