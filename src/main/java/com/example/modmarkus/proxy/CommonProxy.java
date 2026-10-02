@@ -6,6 +6,10 @@ public class CommonProxy {
         System.out.println("[ModMarkus] CommonProxy.registerRenders() - côté serveur");
     }
 
+    public void initClientHandlers() {
+        // Rien côté serveur
+    }
+
     public void openIncomingCallGui() {
         // Ne rien faire côté serveur
     }

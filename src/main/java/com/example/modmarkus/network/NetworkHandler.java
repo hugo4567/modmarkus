@@ -14,5 +14,6 @@ public class NetworkHandler {
         INSTANCE.registerMessage(MessageSlipEffect.Handler.class, MessageSlipEffect.class, 2, Side.CLIENT);
         INSTANCE.registerMessage(com.example.modmarkus.trade.MessageOpenTrade.Handler.class, com.example.modmarkus.trade.MessageOpenTrade.class, 3, Side.CLIENT);
         INSTANCE.registerMessage(com.example.modmarkus.trade.MessageTradeReady.Handler.class, com.example.modmarkus.trade.MessageTradeReady.class, 4, Side.SERVER);
+        INSTANCE.registerMessage(MessageBhopSync.Handler.class, MessageBhopSync.class, 5, Side.SERVER);
     }
 }

@@ -33,6 +33,12 @@ public class ClientProxyNew extends CommonProxy {
     }
 
     @Override
+    public void initClientHandlers() {
+        System.out.println("[ModMarkus] ClientProxyNew.initClientHandlers() - enregistrement BhopClientHandler");
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(new com.example.modmarkus.handler.BhopClientHandler());
+    }
+
+    @Override
     public void openIncomingCallGui() {
         Minecraft.getMinecraft().addScheduledTask(() -> {
             Minecraft.getMinecraft().displayGuiScreen(new com.example.modmarkus.gui.GuiIncomingCall());

@@ -57,6 +57,7 @@ public class ModMarkus {
     public void init(FMLInitializationEvent event) {
         System.out.println("[ModMarkus] init - Enregistrement des renderers côté client...");
         proxy.registerRenders();
+        proxy.initClientHandlers();
         
         // Enregistrer le handler de spawn
         MinecraftForge.EVENT_BUS.register(new com.example.modmarkus.handler.AutoSpawnHandler());
